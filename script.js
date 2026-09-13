@@ -1,697 +1,957 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
 
-/* =====================================================
-   SKY ESPORTS - ADVANCED JAVASCRIPT EFFECTS
-===================================================== */
+<head>
+    <meta charset="UTF-8">
 
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-/* =========================
-   1. MOBILE MENU
-========================= */
+    <meta name="description"
+          content="SKY ESPORTS - Competitive Gaming Community">
 
-const menu = document.getElementById("menu");
-const navLinks = document.getElementById("navLinks");
+    <title>SKY ESPORTS | Next Level Gaming</title>
 
-if (menu && navLinks) {
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    menu.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("active");
-        });
+    <!-- ICONS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    });
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-}
 
+<body>
 
-/* =========================
-   2. SMOOTH SCROLL
-========================= */
+<!-- =========================================
+     LOADING SCREEN
+========================================= -->
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
+<div id="loader">
 
-    link.addEventListener("click", function(e) {
+    <div class="loader-logo">
+        SKY<span>ESPORTS</span>
+    </div>
 
-        const target = document.querySelector(this.getAttribute("href"));
+    <div class="loader-line">
+        <span></span>
+    </div>
 
-        if (target) {
+    <p>INITIALIZING BATTLEFIELD...</p>
 
-            e.preventDefault();
+</div>
 
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
 
-        }
+<!-- =========================================
+     BACKGROUND EFFECTS
+========================================= -->
 
-    });
+<div class="grid-bg"></div>
 
-});
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
 
+<div id="particles"></div>
 
-/* =========================
-   3. SCROLL PROGRESS BAR
-========================= */
 
-const progressBar = document.createElement("div");
+<!-- =========================================
+     HEADER
+========================================= -->
 
-progressBar.id = "scrollProgress";
+<header class="header">
 
-progressBar.style.position = "fixed";
-progressBar.style.top = "0";
-progressBar.style.left = "0";
-progressBar.style.height = "3px";
-progressBar.style.width = "0%";
-progressBar.style.background = "#ff1e1e";
-progressBar.style.boxShadow = "0 0 12px #ff1e1e";
-progressBar.style.zIndex = "99999";
-progressBar.style.transition = "width .08s linear";
+    <a href="#home" class="logo">
+        SKY<span>ESPORTS</span>
+    </a>
 
-document.body.appendChild(progressBar);
 
+    <nav class="navbar" id="navbar">
 
-window.addEventListener("scroll", () => {
+        <a href="#home">HOME</a>
 
-    const scrollTop = window.scrollY;
+        <a href="#games">GAMES</a>
 
-    const pageHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
+        <a href="#tournaments">TOURNAMENTS</a>
 
-    const progress =
-        (scrollTop / pageHeight) * 100;
+        <a href="#about">ABOUT</a>
 
-    progressBar.style.width = progress + "%";
+        <a href="#community">COMMUNITY</a>
 
-});
+        <a href="#contact" class="nav-join">
+            JOIN US
+        </a>
 
+    </nav>
 
-/* =========================
-   4. NAVBAR SCROLL EFFECT
-========================= */
 
-const header = document.querySelector("header");
+    <button class="menu-btn" id="menuBtn">
 
-window.addEventListener("scroll", () => {
+        <i class="fa-solid fa-bars"></i>
 
-    if (!header) return;
+    </button>
 
-    if (window.scrollY > 80) {
+</header>
 
-        header.style.background = "rgba(3,3,3,.96)";
-        header.style.boxShadow =
-            "0 5px 30px rgba(255,0,0,.08)";
 
-    } else {
 
-        header.style.background = "rgba(5,5,5,.88)";
-        header.style.boxShadow = "none";
+<!-- =========================================
+     RIGHT SOCIAL BAR
+========================================= -->
 
-    }
+<div class="social-bar">
 
-});
+    <a href="https://youtube.com/@hlwravan"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="side-social youtube">
 
+        <i class="fa-brands fa-youtube"></i>
 
-/* =========================
-   5. SCROLL REVEAL
-========================= */
+        <span>YouTube</span>
 
-const revealElements = document.querySelectorAll(
-    ".game-card, .tournament, .social, .about-box, .about-grid, .contact-box, .section-head"
-);
+    </a>
 
-revealElements.forEach(element => {
 
-    element.style.opacity = "0";
-    element.style.transform = "translateY(45px)";
-    element.style.transition =
-        "opacity .8s ease, transform .8s ease";
+    <a href="https://www.instagram.com/sahilxravan?stkn=dmttZ205OHFuemxk"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="side-social instagram">
 
-});
+        <i class="fa-brands fa-instagram"></i>
 
+        <span>Instagram</span>
 
-const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
+    </a>
 
-        entries.forEach(entry => {
 
-            if (entry.isIntersecting) {
+    <a href="https://discord.gg/ZpeP9Z2ND"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="side-social discord">
 
-                entry.target.style.opacity = "1";
-                entry.target.style.transform =
-                    "translateY(0)";
+        <i class="fa-brands fa-discord"></i>
 
-                observer.unobserve(entry.target);
+        <span>Discord</span>
 
-            }
+    </a>
 
-        });
 
-    },
-    {
-        threshold: 0.12
-    }
-);
+    <a href="mailto:ravanxeditzz@gmail.com"
+       class="side-social email">
 
+        <i class="fa-solid fa-envelope"></i>
 
-revealElements.forEach(element => {
-    revealObserver.observe(element);
-});
+        <span>Email</span>
 
+    </a>
 
-/* =========================
-   6. STAGGER CARD ANIMATION
-========================= */
+</div>
 
-const cardGroups = [
-    document.querySelectorAll(".game-card"),
-    document.querySelectorAll(".tournament"),
-    document.querySelectorAll(".social")
-];
 
 
-cardGroups.forEach(group => {
+<!-- =========================================
+     HERO
+========================================= -->
 
-    group.forEach((card, index) => {
+<section class="hero" id="home">
 
-        card.style.transitionDelay =
-            (index * 0.12) + "s";
+    <div class="hero-content">
 
-    });
+        <div class="hero-tag">
+            <span></span>
+            WELCOME TO THE NEXT LEVEL
+            <span></span>
+        </div>
 
-});
 
+        <h1>
+            SKY
+            <strong>ESPORTS</strong>
+        </h1>
 
-/* =========================
-   7. NUMBER COUNTER
-========================= */
 
-const counters = document.querySelectorAll(".stat h3");
+        <p>
+            COMPETE. DOMINATE. CONQUER.
+            <br>
 
-const counterObserver = new IntersectionObserver(
-    entries => {
+            A next-generation esports community
+            built for players, creators and champions.
+        </p>
 
-        entries.forEach(entry => {
 
-            if (!entry.isIntersecting) return;
+        <div class="hero-buttons">
 
-            const counter = entry.target;
-            const original = counter.innerText;
+            <a href="#tournaments"
+               class="neon-btn">
 
-            /*
-               Don't animate special values
-               like 24/7 or infinity.
-            */
+                <i class="fa-solid fa-trophy"></i>
 
-            if (!/^\d+\+?$/.test(original)) {
-                counterObserver.unobserve(counter);
-                return;
-            }
+                EXPLORE TOURNAMENTS
 
-            const target =
-                parseInt(original.replace("+", ""));
+            </a>
 
-            let current = 0;
 
-            const duration = 1200;
-            const stepTime = 30;
-            const increment =
-                target / (duration / stepTime);
+            <a href="https://discord.gg/ZpeP9Z2ND"
+               target="_blank"
+               class="outline-btn">
 
-            const timer = setInterval(() => {
+                <i class="fa-brands fa-discord"></i>
 
-                current += increment;
+                JOIN DISCORD
 
-                if (current >= target) {
+            </a>
 
-                    current = target;
+        </div>
 
-                    clearInterval(timer);
 
-                }
+        <div class="scroll-down">
 
-                counter.innerText =
-                    Math.floor(current) +
-                    (original.includes("+") ? "+" : "");
+            <span></span>
 
-            }, stepTime);
+            SCROLL TO EXPLORE
 
-            counterObserver.unobserve(counter);
+        </div>
 
-        });
+    </div>
 
-    },
-    {
-        threshold: 0.6
-    }
-);
+</section>
 
 
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
 
+<!-- =========================================
+     STATS
+========================================= -->
 
-/* =========================
-   8. MOUSE GLOW EFFECT
-========================= */
+<section class="stats">
 
-const mouseGlow = document.createElement("div");
+    <div class="stat-box">
 
-mouseGlow.style.position = "fixed";
-mouseGlow.style.width = "250px";
-mouseGlow.style.height = "250px";
-mouseGlow.style.borderRadius = "50%";
-mouseGlow.style.pointerEvents = "none";
-mouseGlow.style.zIndex = "0";
-mouseGlow.style.background =
-    "radial-gradient(circle, rgba(255,0,0,.10), transparent 70%)";
-mouseGlow.style.transform =
-    "translate(-50%, -50%)";
+        <strong>24/7</strong>
 
-document.body.appendChild(mouseGlow);
+        <span>GAMING COMMUNITY</span>
 
+    </div>
 
-document.addEventListener("mousemove", e => {
 
-    mouseGlow.style.left = e.clientX + "px";
-    mouseGlow.style.top = e.clientY + "px";
+    <div class="stat-box">
 
-});
+        <strong>10+</strong>
 
+        <span>GAME TITLES</span>
 
-/* =========================
-   9. CURSOR TRAIL
-========================= */
+    </div>
 
-let trailTimer = 0;
 
-document.addEventListener("mousemove", e => {
+    <div class="stat-box">
 
-    trailTimer++;
+        <strong>100%</strong>
 
-    if (trailTimer % 3 !== 0) return;
+        <span>COMPETITIVE</span>
 
-    const dot = document.createElement("span");
+    </div>
 
-    dot.style.position = "fixed";
-    dot.style.left = e.clientX + "px";
-    dot.style.top = e.clientY + "px";
-    dot.style.width = "5px";
-    dot.style.height = "5px";
-    dot.style.borderRadius = "50%";
-    dot.style.background = "#ff1e1e";
-    dot.style.boxShadow = "0 0 10px #ff1e1e";
-    dot.style.pointerEvents = "none";
-    dot.style.zIndex = "99998";
-    dot.style.transform = "translate(-50%, -50%)";
-    dot.style.transition =
-        "opacity .5s, transform .5s";
 
-    document.body.appendChild(dot);
+    <div class="stat-box">
 
-    requestAnimationFrame(() => {
+        <strong>∞</strong>
 
-        dot.style.opacity = "0";
-        dot.style.transform =
-            "translate(-50%, -50%) scale(0)";
+        <span>PASSION FOR GAMING</span>
 
-    });
+    </div>
 
-    setTimeout(() => {
-        dot.remove();
-    }, 550);
+</section>
 
-});
 
 
-/* =========================
-   10. CARD 3D TILT EFFECT
-========================= */
+<!-- =========================================
+     GAMES
+========================================= -->
 
-const tiltCards = document.querySelectorAll(
-    ".game-card, .tournament, .social"
-);
+<section class="section" id="games">
 
+    <div class="section-title">
 
-tiltCards.forEach(card => {
+        <span>01 / OUR GAMES</span>
 
-    card.addEventListener("mousemove", e => {
+        <h2>
+            PLAY.
+            <b>COMPETE.</b>
+            WIN.
+        </h2>
 
-        const rect = card.getBoundingClientRect();
+        <p>
+            Multiple games. One powerful esports community.
+        </p>
 
-        const x =
-            e.clientX - rect.left;
+    </div>
 
-        const y =
-            e.clientY - rect.top;
 
-        const centerX =
-            rect.width / 2;
+    <div class="game-grid">
 
-        const centerY =
-            rect.height / 2;
 
-        const rotateX =
-            ((y - centerY) / centerY) * -5;
+        <div class="game-card">
 
-        const rotateY =
-            ((x - centerX) / centerX) * 5;
+            <div class="card-number">
+                01 / GAME
+            </div>
 
-        card.style.transform =
-            `perspective(800px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-5px)`;
+            <div class="game-icon">
+                <i class="fa-solid fa-crosshairs"></i>
+            </div>
 
-    });
+            <h3>BGMI</h3>
 
+            <p>
+                Competitive battle royale tournaments,
+                custom rooms and intense matches.
+            </p>
 
-    card.addEventListener("mouseleave", () => {
+            <div class="card-line"></div>
 
-        card.style.transform =
-            "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
+        </div>
 
-    });
 
-});
 
+        <div class="game-card">
 
-/* =========================
-   11. HERO PARALLAX
-========================= */
+            <div class="card-number">
+                02 / GAME
+            </div>
 
-const heroContent =
-    document.querySelector(".hero-content");
+            <div class="game-icon">
+                <i class="fa-solid fa-fire"></i>
+            </div>
 
-window.addEventListener("scroll", () => {
+            <h3>FREE FIRE</h3>
 
-    if (!heroContent) return;
+            <p>
+                Fast-paced competitive matches,
+                tournaments and community events.
+            </p>
 
-    const scroll = window.scrollY;
+            <div class="card-line"></div>
 
-    if (scroll < window.innerHeight) {
+        </div>
 
-        heroContent.style.transform =
-            `translateY(${scroll * 0.15}px)`;
 
-        heroContent.style.opacity =
-            Math.max(
-                0,
-                1 - scroll / 700
-            );
 
-    }
+        <div class="game-card">
 
-});
+            <div class="card-number">
+                03 / GAME
+            </div>
 
+            <div class="game-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
 
-/* =========================
-   12. FLOATING PARTICLES
-========================= */
+            <h3>VALORANT</h3>
 
-const hero = document.querySelector(".hero");
+            <p>
+                Tactical 5v5 gameplay and competitive
+                esports tournaments.
+            </p>
 
-if (hero) {
+            <div class="card-line"></div>
 
-    for (let i = 0; i < 20; i++) {
+        </div>
 
-        const particle =
-            document.createElement("span");
 
-        particle.style.position = "absolute";
-        particle.style.width =
-            Math.random() * 3 + 1 + "px";
-        particle.style.height =
-            particle.style.width;
-        particle.style.background =
-            "#ff1e1e";
-        particle.style.borderRadius = "50%";
-        particle.style.left =
-            Math.random() * 100 + "%";
-        particle.style.top =
-            Math.random() * 100 + "%";
-        particle.style.opacity =
-            Math.random() * .6;
-        particle.style.boxShadow =
-            "0 0 8px #ff1e1e";
-        particle.style.pointerEvents =
-            "none";
+    </div>
 
-        const duration =
-            Math.random() * 5 + 5;
+</section>
 
-        particle.style.animation =
-            `skyParticle ${duration}s linear infinite`;
 
-        hero.appendChild(particle);
 
-    }
+<!-- =========================================
+     TOURNAMENTS
+========================================= -->
 
-}
+<section class="section tournament-section"
+         id="tournaments">
 
+    <div class="section-title">
 
-/* Particle animation */
+        <span>02 / COMPETITIVE</span>
 
-const particleStyle =
-document.createElement("style");
+        <h2>
+            UPCOMING
+            <b>TOURNAMENTS</b>
+        </h2>
 
-particleStyle.innerHTML = `
+        <p>
+            Get your squad ready and enter the battlefield.
+        </p>
 
-@keyframes skyParticle {
+    </div>
 
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-    }
 
-    20% {
-        opacity: .7;
-    }
+    <div class="tournament-grid">
 
-    50% {
-        transform:
-            translateY(-100px)
-            scale(1.5);
-    }
 
-    100% {
-        transform:
-            translateY(-220px)
-            scale(0);
-        opacity: 0;
-    }
+        <div class="tournament-card">
 
-}
+            <div class="status">
+                REGISTRATION OPEN
+            </div>
 
-`;
+            <h3>SKY BGMI SHOWDOWN</h3>
 
-document.head.appendChild(particleStyle);
+            <p>
+                Squad based competitive tournament
+                for serious players.
+            </p>
 
 
-/* =========================
-   13. BACK TO TOP
-========================= */
+            <div class="tournament-info">
 
-const topButton =
-    document.getElementById("top");
+                <div>
+                    <small>MODE</small>
+                    <strong>SQUAD</strong>
+                </div>
 
+                <div>
+                    <small>ENTRY</small>
+                    <strong>FREE</strong>
+                </div>
 
-if (topButton) {
+                <div>
+                    <small>STATUS</small>
+                    <strong>OPEN</strong>
+                </div>
 
-    window.addEventListener("scroll", () => {
+            </div>
 
-        if (window.scrollY > 500) {
 
-            topButton.classList.add("show");
+            <button class="neon-btn tournament-btn">
+                JOIN TOURNAMENT
+            </button>
 
-        } else {
+        </div>
 
-            topButton.classList.remove("show");
 
-        }
 
-    });
+        <div class="tournament-card">
 
+            <div class="status">
+                COMMUNITY EVENT
+            </div>
 
-    topButton.addEventListener("click", () => {
+            <h3>FREE FIRE BATTLE</h3>
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+            <p>
+                Fast matches, intense fights and
+                community competition.
+            </p>
 
-    });
 
-}
+            <div class="tournament-info">
 
+                <div>
+                    <small>MODE</small>
+                    <strong>SQUAD</strong>
+                </div>
 
-/* =========================
-   14. BUTTON RIPPLE EFFECT
-========================= */
+                <div>
+                    <small>ENTRY</small>
+                    <strong>FREE</strong>
+                </div>
 
-document.querySelectorAll(".btn").forEach(button => {
+                <div>
+                    <small>STATUS</small>
+                    <strong>OPEN</strong>
+                </div>
 
-    button.style.position = "relative";
-    button.style.overflow = "hidden";
+            </div>
 
-    button.addEventListener("click", function(e) {
 
-        const ripple =
-            document.createElement("span");
+            <button class="neon-btn tournament-btn">
+                JOIN TOURNAMENT
+            </button>
 
-        const rect =
-            this.getBoundingClientRect();
+        </div>
 
-        const size =
-            Math.max(
-                rect.width,
-                rect.height
-            );
 
-        ripple.style.width = size + "px";
-        ripple.style.height = size + "px";
-        ripple.style.position = "absolute";
-        ripple.style.borderRadius = "50%";
-        ripple.style.background =
-            "rgba(255,255,255,.18)";
-        ripple.style.left =
-            (e.clientX - rect.left - size / 2) + "px";
-        ripple.style.top =
-            (e.clientY - rect.top - size / 2) + "px";
-        ripple.style.transform =
-            "scale(0)";
-        ripple.style.pointerEvents =
-            "none";
 
-        ripple.style.animation =
-            "skyRipple .6s linear";
+        <div class="tournament-card coming">
 
-        this.appendChild(ripple);
+            <div class="status">
+                COMING SOON
+            </div>
 
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
+            <h3>VALORANT CLASH</h3>
 
-    });
+            <p>
+                Tactical 5v5 competition for
+                competitive Valorant players.
+            </p>
 
-});
 
+            <div class="tournament-info">
 
-/* Ripple CSS */
+                <div>
+                    <small>MODE</small>
+                    <strong>5V5</strong>
+                </div>
 
-const rippleStyle =
-document.createElement("style");
+                <div>
+                    <small>ENTRY</small>
+                    <strong>TBA</strong>
+                </div>
 
-rippleStyle.innerHTML = `
+                <div>
+                    <small>STATUS</small>
+                    <strong>SOON</strong>
+                </div>
 
-@keyframes skyRipple {
+            </div>
 
-    to {
-        transform: scale(2);
-        opacity: 0;
-    }
 
-}
+            <button class="outline-btn">
+                GET UPDATES
+            </button>
 
-`;
+        </div>
 
-document.head.appendChild(rippleStyle);
 
+    </div>
 
-/* =========================
-   15. TYPING EFFECT
-========================= */
+</section>
 
-const typingElement =
-document.querySelector(".small-title");
 
 
-if (typingElement) {
+<!-- =========================================
+     ABOUT
+========================================= -->
 
-    const text =
-        "WELCOME TO SKY ESPORTS";
+<section class="section about-section"
+         id="about">
 
-    let index = 0;
+    <div class="about-content">
 
-    typingElement.innerText = "";
+        <div class="section-title">
 
-    function typeText() {
+            <span>03 / WHO WE ARE</span>
 
-        if (index < text.length) {
+            <h2>
+                BUILT FOR
+                <b>GAMERS.</b>
+            </h2>
 
-            typingElement.innerText +=
-                text.charAt(index);
+        </div>
 
-            index++;
 
-            setTimeout(typeText, 70);
+        <p>
+            SKY ESPORTS is a gaming and esports community
+            focused on competitive gaming, tournaments,
+            events and creating a platform where gamers
+            can connect, compete and grow.
+        </p>
 
-        }
 
-    }
+        <ul>
 
-    typeText();
+            <li>
+                <i class="fa-solid fa-check"></i>
+                Competitive gaming tournaments
+            </li>
 
-}
+            <li>
+                <i class="fa-solid fa-check"></i>
+                Gaming community events
+            </li>
 
+            <li>
+                <i class="fa-solid fa-check"></i>
+                Players & creators community
+            </li>
 
-/* =========================
-   16. ESC KEY CLOSE MENU
-========================= */
+            <li>
+                <i class="fa-solid fa-check"></i>
+                Regular esports activities
+            </li>
 
-document.addEventListener("keydown", e => {
+            <li>
+                <i class="fa-solid fa-check"></i>
+                Community-driven experience
+            </li>
 
-    if (e.key === "Escape") {
+        </ul>
 
-        if (navLinks) {
-            navLinks.classList.remove("active");
-        }
+    </div>
 
-    }
 
-});
+    <div class="about-visual">
 
+        <div class="visual-ring ring-one"></div>
 
-/* =========================
-   17. PAGE LOADING EFFECT
-========================= */
+        <div class="visual-ring ring-two"></div>
 
-window.addEventListener("load", () => {
+        <div class="visual-logo">
 
-    document.body.classList.add("page-loaded");
+            SKY
+            <span>ESPORTS</span>
 
-});
+        </div>
 
+    </div>
 
-/* =========================
-   18. DISABLE CONTEXT MENU
-========================= */
+</section>
 
-/*
-   Agar website ko simple protection
-   deni ho to ye uncomment kar sakte ho.
 
-   document.addEventListener("contextmenu", e => {
-       e.preventDefault();
-   });
-*/
 
+<!-- =========================================
+     COMMUNITY
+========================================= -->
 
-console.log(
-    "%c SKY ESPORTS ",
-    "color:#ff1e1e;font-size:25px;font-weight:bold;"
-);
+<section class="community"
+         id="community">
 
-console.log(
-    "%c Welcome to the battlefield! ",
-    "color:white;font-size:14px;"
-);
+    <div class="community-content">
 
-</script>
+        <span>04 / JOIN THE COMMUNITY</span>
+
+        <h2>
+            READY TO ENTER
+            <b>THE BATTLE?</b>
+        </h2>
+
+        <p>
+            Join our Discord community and stay updated
+            with tournaments, gaming events and announcements.
+        </p>
+
+
+        <a href="https://discord.gg/ZpeP9Z2ND"
+           target="_blank"
+           class="neon-btn">
+
+            <i class="fa-brands fa-discord"></i>
+
+            JOIN SKY ESPORTS
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     SOCIALS
+========================================= -->
+
+<section class="section social-section">
+
+    <div class="section-title">
+
+        <span>05 / FOLLOW US</span>
+
+        <h2>
+            STAY
+            <b>CONNECTED.</b>
+        </h2>
+
+        <p>
+            Follow SKY ESPORTS and never miss an update.
+        </p>
+
+    </div>
+
+
+    <div class="social-grid">
+
+
+        <a href="https://youtube.com/@hlwravan"
+           target="_blank"
+           class="social-card youtube-card">
+
+            <div class="social-card-icon">
+
+                <i class="fa-brands fa-youtube"></i>
+
+            </div>
+
+            <div>
+
+                <h3>YouTube</h3>
+
+                <p>
+                    Gaming videos & live streams
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+
+        <a href="https://www.instagram.com/sahilxravan?stkn=dmttZ205OHFuemxk"
+           target="_blank"
+           class="social-card instagram-card">
+
+            <div class="social-card-icon">
+
+                <i class="fa-brands fa-instagram"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Instagram</h3>
+
+                <p>
+                    Latest gaming updates
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+
+        <a href="https://discord.gg/ZpeP9Z2ND"
+           target="_blank"
+           class="social-card discord-card">
+
+            <div class="social-card-icon">
+
+                <i class="fa-brands fa-discord"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Discord</h3>
+
+                <p>
+                    Join our gaming community
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+
+        <a href="mailto:ravanxeditzz@gmail.com"
+           class="social-card email-card">
+
+            <div class="social-card-icon">
+
+                <i class="fa-solid fa-envelope"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Email</h3>
+
+                <p>
+                    Business & partnership
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     CONTACT
+========================================= -->
+
+<section class="contact-section"
+         id="contact">
+
+    <div class="contact-box">
+
+        <span>06 / BUSINESS & CONTACT</span>
+
+        <h2>
+            LET'S BUILD
+            <b>SOMETHING BIG.</b>
+        </h2>
+
+        <p>
+            For business enquiries, partnerships,
+            esports collaborations and promotions.
+        </p>
+
+
+        <a href="mailto:ravanxeditzz@gmail.com"
+           class="neon-btn">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            CONTACT US
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <h2>
+                SKY<span>ESPORTS</span>
+            </h2>
+
+            <p>
+                A community-driven esports platform
+                for gamers, creators and competitive players.
+            </p>
+
+
+            <div class="footer-icons">
+
+                <a href="https://youtube.com/@hlwravan"
+                   target="_blank">
+
+                    <i class="fa-brands fa-youtube"></i>
+
+                </a>
+
+                <a href="https://www.instagram.com/sahilxravan?stkn=dmttZ205OHFuemxk"
+                   target="_blank">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                </a>
+
+                <a href="https://discord.gg/ZpeP9Z2ND"
+                   target="_blank">
+
+                    <i class="fa-brands fa-discord"></i>
+
+                </a>
+
+                <a href="mailto:ravanxeditzz@gmail.com">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+            <h4>NAVIGATION</h4>
+
+            <a href="#home">Home</a>
+
+            <a href="#games">Games</a>
+
+            <a href="#tournaments">
+                Tournaments
+            </a>
+
+            <a href="#about">About</a>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+            <h4>COMMUNITY</h4>
+
+            <a href="https://discord.gg/ZpeP9Z2ND"
+               target="_blank">
+                Discord
+            </a>
+
+            <a href="https://www.instagram.com/sahilxravan?stkn=dmttZ205OHFuemxk"
+               target="_blank">
+                Instagram
+            </a>
+
+            <a href="https://youtube.com/@hlwravan"
+               target="_blank">
+                YouTube
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+            <h4>CONTACT</h4>
+
+            <a href="mailto:ravanxeditzz@gmail.com">
+                Business Email
+            </a>
+
+            <a href="https://discord.gg/ZpeP9Z2ND"
+               target="_blank">
+                Join Discord
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 SKY ESPORTS. ALL RIGHTS RESERVED.
+        </p>
+
+        <span>
+            BUILT FOR THE NEXT GENERATION.
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<!-- JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
